@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Template for AWS resources
+
+Resources:
+  SqsEventQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub sqs-eventtest-queue
+  SQSUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: sqs-user
+  SQSUserAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref SQSUser
+
+Outputs:
+  SQSQueueName:
+    Description: SQS Queue name
+    Value: !GetAtt
+      - SqsEventQueue
+      - QueueName
+  SQSQueueURL:
+    Description: SQS Queue URL
+    Value: !Ref SqsEventQueue
+  SQSUser:
+    Description: SQS User
+    Value: !Ref SQSUser
+  SQSUserAccessKeyId:
+    Description: SQS User AccessKey
+    Value: !Ref SQSUserAccessKey
+  SQSUserSecretAccessKey:
+    Description: SQS User AccessKey
+    Value: !GetAtt
+      - SQSUserAccessKey
+      - SecretAccessKey

@@ -1,0 +1,21 @@
+# S3
+aws s3 mb s3://sqs-bucket-event --region us-east-1
+
+aws s3 ls | grep event
+
+# add event notification in console
+
+
+# SQS
+aws sqs create-queue --queue-name sqs-bucket-event
+
+aws sqs list-queues
+
+# add permission in console
+
+aws sqs delete-queue --queue-url https://sqs.us-east-1.amazonaws.com/985955842608/sqs-bucket-event
+
+
+# Curl
+
+curl -X POST http://localhost:8080/api/event -d "Test Message Event"

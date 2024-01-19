@@ -1,0 +1,12 @@
+# SQS
+aws sqs create-queue --endpoint-url=http://localhost:4566 --queue-name sqs-eventtest-queue
+
+aws sqs list-queues --endpoint-url=http://localhost:4566
+
+aws sqs send-message --endpoint-url=http://localhost:4566 --queue-url http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/sqs-eventtest-queue --message-body Test
+
+aws sqs receive-message  --endpoint-url=http://localhost:4566  --queue-url http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/sqs-eventtest-queue --region us-east-1 --output json | cat
+
+# Curl
+
+curl -X POST http://localhost:8080/api/event -d "Test Message Event Local Stack"

@@ -1,0 +1,21 @@
+version: '3.0'
+
+services:
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566-4599:4566-4599"
+      - "9000:9000"
+    environment:
+      - SERVICES=s3,sqs
+      - DEBUG=1
+      - DEFAULT_REGION=us-east-1
+      - DATA_DIR=/tmp/localstack/data
+      - AWS_ACCESS_KEY_ID=dummyaccess
+      - AWS_SECRET_ACCESS_KEY=dummysecret
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - HOST_TMP_FOLDER=/tmp
+      - SQS_PORT=4576
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/Users/brianenochson/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

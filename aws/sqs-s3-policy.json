@@ -1,0 +1,23 @@
+{
+  "Version": "2012-10-17",
+  "Id": "grant-access-ID",
+  "Statement": [
+    {
+      "Sid": "grant-access-ID",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Action": "SQS:SendMessage",
+      "Resource": "arn:aws:sqs:us-east-1:985955842608:sqs-bucket-event",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceAccount": "985955842608"
+        },
+        "ArnLike": {
+          "aws:SourceArn": "arn:aws:s3:::sqs-eventsend-bucket"
+        }
+      }
+    }
+  ]
+}

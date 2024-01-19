@@ -1,0 +1,4 @@
+aws cloudformation deploy --template-file sqs-cf-template.yaml --stack-name event-sqs-stack --region us-east-1 --capabilities CAPABILITY_NAMED_IAM
+
+
+aws sqs list-queues | grep eventtest
